@@ -4,7 +4,7 @@ Este é um código em Python para reconhecimento facial em vídeos utilizando a 
 
 ## Pré-requisitos
 
-- Python 3.x
+- Python 3.8
 
 ## Instalação das bibliotecas
 
@@ -33,17 +33,7 @@ Isso irá instalar as versões específicas das bibliotecas necessárias para ex
 
 1. Certifique-se de ter um vídeo no formato MP4 disponível para processamento. Você pode alterar o caminho do vídeo na linha video_capture = cv2.VideoCapture(f"video/debate_2022.mp4") para o local do seu vídeo.
 
-2. Faça o download das imagens de treinamento para cada pessoa que você deseja reconhecer. Neste código de exemplo, temos as imagens do Lula e do Bolsonaro. Certifique-se de ter as imagens corretas e atualize os caminhos das imagens de treinamento na seção de carregamento de imagens, como mostrado abaixo:
-
-# carregando imagem do Lula de treino
-lula_image = face_recognition.load_image_file(f"fotos_treino/lula.png")
-lula_face_encoding = face_recognition.face_encodings(lula_image)[0]
-
-# carregando imagem do Bolsonaro de treino
-bolsonaro_image = face_recognition.load_image_file(f"fotos_treino/bolsonaro.jpg")
-bolsonaro_face_encoding = face_recognition.face_encodings(bolsonaro_image)[0]
-
-Certifique-se de que as imagens de treinamento estejam no formato correto (PNG ou JPEG) e correspondam à pessoa que você deseja reconhecer.
+2. Faça o download das imagens de treinamento para cada pessoa que você deseja reconhecer. Neste código de exemplo, temos as imagens do Lula e do Bolsonaro. Certifique-se de ter as imagens corretas e atualize os caminhos das imagens de treinamento na seção de carregamento de imagens.
 
 3. Execute o código. Ele processará o vídeo, detectará as faces presentes e as comparará com as imagens de treinamento para reconhecimento facial.
 
@@ -53,23 +43,22 @@ Certifique-se de que as imagens de treinamento estejam no formato correto (PNG o
 
 6. Após a conclusão do processamento do vídeo, será exibido um DataFrame com informações sobre o tempo total do vídeo, o tempo de cada pessoa reconhecida (Lula e Bolsonaro) e o percentual de tempo que cada pessoa apareceu no vídeo.
 
-Certifique-se de que as imagens de treinamento e o vídeo estejam no formato correto e siga as etapas acima para utilizar o código corretamente.
+# Como o script funciona
 
-# Explicação do código
+### bibliotecas
 
-O código utiliza a biblioteca OpenCV (cv2) para manipulação e processamento de imagens e vídeos, e a biblioteca face_recognition para o reconhecimento facial. Ele também faz uso das bibliotecas NumPy (np) para operações matemáticas em arrays multidimensionais e pandas (pd) para trabalhar com dados em diversos formatos, como CSV. A biblioteca tqdm é utilizada para exibir o progresso do processamento do vídeo.
+O código utiliza a biblioteca **OpenCV (cv2)** para manipulação e processamento de imagens e vídeos, e a biblioteca **face_recognition** para o reconhecimento facial. Ele também faz uso das bibliotecas **NumPy (np)** para operações matemáticas em arrays multidimensionais e **pandas (pd)** para trabalhar com dados em diversos formatos, como CSV. A biblioteca **tqdm** é utilizada para exibir o progresso do processamento do vídeo.
 
-O vídeo a ser processado é carregado utilizando a função cv2.VideoCapture(), que recebe como parâmetro o caminho do vídeo. Em seguida, as imagens de treinamento do Lula e do Bolsonaro são carregadas utilizando a função face_recognition.load_image_file(). Os rostos nas imagens de treinamento são codificados utilizando face_recognition.face_encodings() e os encodings são armazenados em uma lista.
+### imagens e vídeos carregados
 
-A função detecta_faces() é responsável por detectar as faces presentes em um determinado quadro do vídeo. Ela redimensiona o quadro, converte-o para o formato RGB, utiliza o algoritmo de detecção facial CNN para localizar as faces e em seguida codifica as faces encontradas utilizando face_recognition.face_encodings(). Os nomes das faces são determinados comparando os encodings das faces encontradas com os encodings das imagens de treinamento utilizando face_recognition.compare_faces(). Em seguida, os retângulos e os nomes das faces são desenhados no quadro.
+O vídeo a ser processado é carregado utilizando a função `cv2.VideoCapture()`, que recebe como parâmetro o caminho do vídeo. Em seguida, as imagens de treinamento do Lula e do Bolsonaro são carregadas utilizando a função `face_recognition.load_image_file()`. Os rostos nas imagens de treinamento são codificados utilizando `face_recognition.face_encodings()` e os encodings são armazenados em uma lista.
 
-A função processa_frames() é responsável por ler cada quadro do vídeo, chamar a função detecta_faces() para detectar as faces presentes, desenhar os retângulos e os nomes das faces, e exibir o resultado em uma janela de vídeo. O tempo de cada pessoa reconhecida (Lula e Bolsonaro) e o tempo total do vídeo são calculados e armazenados em variáveis. Após a conclusão do processamento do vídeo, um DataFrame é criado com as informações de tempo e é exibido na saída.
+### executando as funcoes de reconhecimento
 
-No final do código, a função processa_frames() é chamada para iniciar o processamento do vídeo.
+A função `detecta_faces()` é responsável por detectar as faces presentes em um determinado quadro do vídeo. Ela redimensiona o quadro, converte-o para o formato RGB, utiliza o algoritmo de detecção facial `CNN` para localizar as faces e em seguida codifica as faces encontradas utilizando `face_recognition.face_encodings()`. Os nomes das faces são determinados comparando os encodings das faces encontradas com os encodings das imagens de treinamento utilizando `face_recognition.compare_faces()`. Em seguida, os retângulos e os nomes das faces são desenhados no quadro.
 
-Certifique-se de que as bibliotecas necessárias estejam instaladas, siga as etapas de uso corretamente e utilize as imagens de treinamento apropriadas para obter resultados precisos no reconhecimento facial.
+A função `processa_frames()` é responsável por ler cada quadro do vídeo, chamar a `função detecta_faces()` para detectar as faces presentes, desenhar os retângulos e os nomes das faces, e exibir o resultado em uma janela de vídeo. O tempo de cada pessoa reconhecida (Lula e Bolsonaro) e o tempo total do vídeo são calculados e armazenados em variáveis. Após a conclusão do processamento do vídeo, um DataFrame é criado com as informações de tempo e é exibido na saída.
 
-
-
+No final do código, a função `processa_frames()` é chamada para iniciar o processamento do vídeo.
 
 
